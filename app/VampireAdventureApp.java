@@ -10,34 +10,41 @@ public class VampireAdventureApp {
 
     private static Scanner scanner = new Scanner(System.in);
 
+    public static String trennstrich = "===========================================";
+
+
     /**
      * @param args mainklasse
      */
     public static void main(String[] args) {
 
-        //while (true) {
+        while (true) {
             showMenu();
-            int choice = readUserInput();
+            int choice = readUserInput("\nBitte wähle eine Zahl zwischen 1 und 6:\t", von(1).bis(6));
             handle(choice);
-            System.out.println("====================");
-        //}
+            System.out.println(trennstrich);
+        }
     }
 
     /**
      * 
-     * @return
+     * @return 
      */
-    private static int readUserInput() {
-        System.out.print("\nPlease choose a number between 1 and 6:\t");
-        int choiceInternal = 0;
+    private static int readUserInput(String abfrage, int von, int bis) {
+        while (true) {
+            System.out.print(abfrage);
         try{
-         choiceInternal = scanner.nextInt();
+             int eingabe = scanner.nextInt();
+            if (von <= eingabe && eingabe <= bis) {
+                return eingabe;
+            else System.out.println("Bitte wähle eine Zahl zwischen " + von + " und " + bis + ".");
+
         }
         catch(Exception e){
-            System.out.println(e.getMessage());
+            String falscheEingabe = scanner.nextLine();
+            System.out.println("Bitte wähle eine Zahl zwischen " + von + " und " + bis + ".");
         }
-
-        return choiceInternal;
+      }
     }
 
     /**
@@ -73,7 +80,7 @@ public class VampireAdventureApp {
      */
     private static void showMenu() {
 
-        String menuItems[] = { "", "(1)\t Create Vampire", "(2)\t Show Selected Vampire" };
+        String menuItems[] = { "", "(1)\t Create Vampire", "(2)\t Show Selected Vampire", "(3)\t List all Vampirs","(4)\t Delete Vampire","(5)\t Start Nightly Adventure","(6)\t Quit" };
 
         System.out.println("\nVampire Adventures 1.0\n");
         for (int i = 1; i < menuItems.length; i++) {

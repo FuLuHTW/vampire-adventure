@@ -1,6 +1,11 @@
 package model;
 
 public class Human {
-    
-    private String name;
+
+   private String id = UUID.randomUUID().toString();
+
+
+
+
+   
 }
